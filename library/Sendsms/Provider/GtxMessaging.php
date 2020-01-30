@@ -26,6 +26,12 @@ class GtxMessaging extends ProviderHook
          */
         $authKey = $this->getRequiredSetting('auth_key');
         $baseUrl = $this->getSetting('base_url', $this->baseUrl);
+        if ($proxy = $this->getSetting('proxy')) {
+            $this->client()->setProxy($proxy, $this->getSetting('proxy_type', 'HTTP'));
+            if ($proxyUser = $this->getSetting('proxy_user')) {
+                $this->client()->setProxyAuth($proxyUser, $this->getSetting('proxy_pass'));
+            }
+        }
 
         /** @var string $format SMSC response. json, xml, plain(default) */
         $format = 'json';
@@ -35,8 +41,6 @@ class GtxMessaging extends ProviderHook
             \urlencode($authKey),
             \urlencode($format),
         ]);
-
-        echo "$url\n";
 
         $headers = [];
         switch ($format) {
@@ -106,8 +110,8 @@ class GtxMessaging extends ProviderHook
 
         // response fields:
         // <message-count>
-        //<message-status>
-        //<message-id>
+        // <message-status>
+        // <message-id>
 
         // TODO: Result object?
         return $this->client()->get($url, null, $headers);

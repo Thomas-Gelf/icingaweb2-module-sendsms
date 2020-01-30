@@ -2,7 +2,6 @@
 
 namespace Icinga\Module\Sendsms\Clicommands;
 
-use Icinga\Application\Hook;
 use Icinga\Cli\Command;
 use Icinga\Module\Sendsms\Destination;
 use Icinga\Module\Sendsms\Hook\ProviderHook;
