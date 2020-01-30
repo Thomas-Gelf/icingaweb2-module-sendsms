@@ -44,7 +44,7 @@ Icinga Configuration
         arguments += {
             "--account" = "$sms_account$"
             "--to"      = "$mobile_phone$"
-            "--type"    = "$notification_type$"
+            "--type"    = "$notification.type$"
             "--host"    = "$host.name$"
             "--service" = "$service.name$"
             "--output   = "$service.output$"
